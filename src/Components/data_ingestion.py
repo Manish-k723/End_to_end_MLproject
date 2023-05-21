@@ -1,10 +1,13 @@
 import pandas as pd
 import os
 import sys
-from src.exception import CustomException
-from src.logger import logging
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+
+from src.exception import CustomException
+from src.logger import logging
+from src.Components.data_transformation import DataTransformation
+from src.Components.data_transformation import datatransformationConfig
 
 @dataclass
 class data_ingestion_config:
@@ -34,11 +37,14 @@ class data_ingestion:
             logging.info('Data Ingetion Completed')
 
             return (
-                self_ingestion.train_data_path, self_ingestion.test_data_path
+                self.ingestion_config.train_data_path, self.ingestion_config.test_data_path
             )
 
         except Exception as e:
-            raise CustomeException(e,sys)
+            raise CustomException(e,sys)
 if __name__ == "__main__":
     obj = data_ingestion()
-    obj.initiate_data_ingestion()
+    train_data, test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data, test_data)
