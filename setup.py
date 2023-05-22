@@ -22,7 +22,5 @@ setup(
     author="Manish",
     author_email='manishkumar_me20b17_56@dtu.ac.in',
     packages=find_packages(),
-    install_requires = ['pandas','seaborn','numpy','scikit-learn','catboost','xgboost','matplotlib','plotly','dill']
+    install_requires = get_requirements('requirements.txt') #['pandas','seaborn','numpy','scikit-learn','catboost','xgboost','matplotlib','plotly','dill']
 )
-
-#get_requirements('requirements.txt') 
